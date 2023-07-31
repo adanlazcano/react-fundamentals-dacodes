@@ -5,31 +5,43 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as services from "@/services/movies";
 
-export const useMovies = () => {
+type MovieFunctions = {
+  movies: Array<string>;
+};
+
+export const useMovies = (): MovieFunctions => {
   const [movies, setMovies] = useState<Array<string>>([]);
   const { pages, searchMovies } = useSelector(moviesSelector);
   const dispatch = useDispatch();
 
   const fetchGenres = async () => {
-    const { data }: any = await services.getGenres();
+    try {
+      const { data }: any = await services.getGenres();
 
-    dispatch(setGenres(data?.genres));
+      dispatch(setGenres(data?.genres));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchMovies = async (
     list: string,
     page: number
   ): Promise<undefined> => {
-    const { data }: any = await services.getMovies(list, page);
+    try {
+      const { data }: any = await services.getMovies(list, page);
 
-    setMovies(data?.results);
-    dispatch(
-      setPages({
-        page: data?.page,
-        total_pages: data?.total_pages,
-        total_results: data?.total_results,
-      })
-    );
+      setMovies(data?.results);
+      dispatch(
+        setPages({
+          page: data?.page,
+          total_pages: data?.total_pages,
+          total_results: data?.total_results,
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
