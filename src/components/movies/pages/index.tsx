@@ -12,7 +12,7 @@ const PagesComponent = memo(() => {
     <div className={styles.container}>
       <span
         className={`${styles.circle} ${pages?.page === 1 && styles.disabled}`}
-        onClick={() => dispatch(countPage(pages?.page - 1))}
+        onClick={() => {dispatch(countPage(pages?.page - 1))}}
       >
         <img src={arrowLeft} alt="left" />
       </span>

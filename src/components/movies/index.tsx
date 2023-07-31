@@ -9,12 +9,12 @@ import Pages from "./pages";
 
 const MoviesComponent = memo(() => {
   const { searchMovies } = useSelector(moviesSelector);
-  const { movies } = useMovies();
+  const { movies,loading } = useMovies();
   return (
     <div className={styles.container}>
       <Buttons />
       <h2 className={styles.title}>{searchMovies?.title}</h2>
-      <Cards data={movies ?? []} />
+      <Cards loading={loading} data={movies ?? []} />
       <Pages />
     </div>
   );

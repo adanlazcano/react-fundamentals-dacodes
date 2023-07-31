@@ -7,10 +7,12 @@ import * as services from "@/services/movies";
 
 type MovieFunctions = {
   movies: Array<string>;
+  loading: boolean;
 };
 
 export const useMovies = (): MovieFunctions => {
   const [movies, setMovies] = useState<Array<string>>([]);
+  const [loading,setLoading] = useState<boolean>(false)
   const { pages, searchMovies } = useSelector(moviesSelector);
   const dispatch = useDispatch();
 
@@ -29,6 +31,7 @@ export const useMovies = (): MovieFunctions => {
     page: number
   ): Promise<undefined> => {
     try {
+      setLoading(true)
       const { data }: any = await services.getMovies(list, page);
 
       setMovies(data?.results);
@@ -41,6 +44,8 @@ export const useMovies = (): MovieFunctions => {
       );
     } catch (error) {
       console.log(error);
+    }finally{
+      setLoading(false)
     }
   };
 
@@ -53,5 +58,6 @@ export const useMovies = (): MovieFunctions => {
 
   return {
     movies,
+    loading
   };
 };
