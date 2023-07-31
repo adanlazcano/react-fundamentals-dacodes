@@ -1,0 +1,11 @@
+@import "../../css/colors.scss";
+
+.container {
+  padding: 4rem 6rem 4rem 4rem;
+
+  .title {
+    color: $clr-white;
+    font-weight: 700;
+    margin-top: 4rem;
+  }
+}

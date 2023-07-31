@@ -1,0 +1,22 @@
+@import "../../css/colors";
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 2rem;
+  column-gap: 2rem;
+  @media (max-width: 890px) {
+    justify-content: center;
+  }
+  li {
+    .buttons {
+      @include customButton();
+    }
+
+    &.active {
+      button {
+        background: $clr-purple;
+      }
+    }
+  }
+}

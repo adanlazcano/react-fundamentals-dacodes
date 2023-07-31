@@ -1,0 +1,12 @@
+@import "../../css/colors.scss";
+
+.container {
+  padding: 5rem 6rem 4rem 4rem;
+
+  h3 {
+    color: $clr-white;
+  }
+  small {
+    color: $clr-gray-white;
+  }
+}
