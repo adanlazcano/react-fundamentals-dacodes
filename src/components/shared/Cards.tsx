@@ -15,7 +15,7 @@ interface List {
 const Cards = memo(({ data,loading }: List) => {
   const { genres } = useSelector(moviesSelector);
 
-  if(loading){
+  if(!loading){
     return <Loading/>
   }
   return (

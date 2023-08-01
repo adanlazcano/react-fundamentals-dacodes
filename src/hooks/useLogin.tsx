@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 type LoginFunctions = {
   inputFields: Array<any>;
-  isEnabled: boolean;
+  isEmpty: boolean;
+  isError: boolean;
   onHandleChange: (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -26,8 +27,8 @@ export const useLogin = (): LoginFunctions => {
       terms: false,
     },
   ]);
-  const [isEnabled, setIsEnabled] = useState<boolean>(true);
-  const [errors, setErrors] = useState<boolean>(true);
+  const [isEmpty, setisEmpty] = useState<boolean>(true);
+  const [isError, setisError] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -42,14 +43,14 @@ export const useLogin = (): LoginFunctions => {
       setInputFields(data);
 
       if (e.target.name === "mail") {
-        setErrors(!IS_VALID_EMAIL(e.target.value));
+        setisError(!IS_VALID_EMAIL(e.target.value));
       }
 
       const emptyFields: number = Object.values(inputFields[0]).filter(
         (value) => value === "" || !value
       ).length;
 
-      setIsEnabled(emptyFields > 0 || errors);
+      setisEmpty(emptyFields > 0);
     } catch (error) {
       console.log(error);
     }
@@ -71,7 +72,8 @@ export const useLogin = (): LoginFunctions => {
 
   return {
     inputFields,
-    isEnabled,
+    isEmpty,
+    isError,
     onHandleChange,
     onHandleSubmit,
   };

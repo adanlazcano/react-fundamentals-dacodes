@@ -3,7 +3,9 @@ import styles from "./form.module.scss";
 import { IInputFields, useLogin } from "@/hooks/useLogin";
 
 const Form = memo(() => {
-  const { inputFields, isEnabled, onHandleChange, onHandleSubmit } = useLogin();
+  const { inputFields, isEmpty,isError, onHandleChange, onHandleSubmit } = useLogin();
+
+  console.table({isEmpty,isError})
 
   return (
     <form onSubmit={onHandleSubmit} className={styles.login}>
@@ -41,8 +43,8 @@ const Form = memo(() => {
       ))}
 
       <button
-        className={isEnabled ? styles.disabled : styles.btn}
-        disabled={isEnabled}
+        className={isEmpty || isError ? styles.disabled : styles.btn}
+        disabled={isEmpty || isError}
       >
         Crear cuenta
       </button>
