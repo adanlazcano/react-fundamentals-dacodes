@@ -19,10 +19,10 @@ const Template = memo(({ children }: ITemplate) => {
           className="userLogo"
           alt="user"
           title={
-            sessionStorage.getItem("token") ? "Cerrar Sesión" : "Iniciar Sesión"
+            sessionStorage.getItem("guest_session_id") ? "Cerrar Sesión" : "Iniciar Sesión"
           }
           onClick={() => {
-            sessionStorage.removeItem("token");
+            sessionStorage.removeItem("guest_session_id");
             window.location.assign("/");
           }}
         />
