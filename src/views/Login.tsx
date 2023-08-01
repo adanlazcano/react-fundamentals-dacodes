@@ -1,10 +1,8 @@
-import LoginComponent from '@/components/login'
-import{ memo } from 'react'
+import { memo } from "react";
+import LoginComponent from "@/components/login";
 
 const Login = memo(() => {
-  return (
-    <LoginComponent/>
-  )
-})
+  return <LoginComponent />;
+});
 
-export default Login
+export default Login;

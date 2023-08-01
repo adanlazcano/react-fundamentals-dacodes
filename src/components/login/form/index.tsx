@@ -3,9 +3,8 @@ import styles from "./form.module.scss";
 import { IInputFields, useLogin } from "@/hooks/useLogin";
 
 const Form = memo(() => {
-  const { inputFields, isEmpty,isError, onHandleChange, onHandleSubmit } = useLogin();
-
-  console.table({isEmpty,isError})
+  const { inputFields, isEmpty, isError, onHandleChange, onHandleSubmit } =
+    useLogin();
 
   return (
     <form onSubmit={onHandleSubmit} className={styles.login}>

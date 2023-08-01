@@ -9,18 +9,16 @@ import Loading from "./Loading";
 
 interface List {
   data: Array<string>;
-  loading:boolean
+  loading: boolean;
 }
-
-const Cards = memo(({ data,loading }: List) => {
+const Cards = memo(({ data, loading }: List) => {
   const { genres } = useSelector(moviesSelector);
 
-  if(!loading){
-    return <Loading/>
+  if (loading) {
+    return <Loading />;
   }
   return (
     <div className={styles.container}>
-      
       <ul className={styles.movies}>
         {data?.map((item: any) => {
           const arrGenre: any = [];
@@ -60,7 +58,6 @@ const Cards = memo(({ data,loading }: List) => {
           );
         })}
       </ul>
-
     </div>
   );
 });

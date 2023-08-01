@@ -12,7 +12,7 @@ type MovieFunctions = {
 
 export const useMovies = (): MovieFunctions => {
   const [movies, setMovies] = useState<Array<string>>([]);
-  const [loading,setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
   const { pages, searchMovies } = useSelector(moviesSelector);
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ export const useMovies = (): MovieFunctions => {
     page: number
   ): Promise<undefined> => {
     try {
-      setLoading(true)
+      setLoading(true);
       const { data }: any = await services.getMovies(list, page);
 
       setMovies(data?.results);
@@ -44,8 +44,8 @@ export const useMovies = (): MovieFunctions => {
       );
     } catch (error) {
       console.log(error);
-    }finally{
-      setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,6 +58,6 @@ export const useMovies = (): MovieFunctions => {
 
   return {
     movies,
-    loading
+    loading,
   };
 };

@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IS_VALID_EMAIL } from "@/assets/constants";
+import { IS_VALID_EMAIL } from "@/assets/constants/regexExp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type LoginFunctions = {
-  inputFields: Array<any>;
+  inputFields: Array<IInputFields>;
   isEmpty: boolean;
   isError: boolean;
   onHandleChange: (
@@ -27,8 +27,8 @@ export const useLogin = (): LoginFunctions => {
       terms: false,
     },
   ]);
-  const [isEmpty, setisEmpty] = useState<boolean>(true);
-  const [isError, setisError] = useState<boolean>(true);
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -43,14 +43,14 @@ export const useLogin = (): LoginFunctions => {
       setInputFields(data);
 
       if (e.target.name === "mail") {
-        setisError(!IS_VALID_EMAIL(e.target.value));
+        setIsError(!IS_VALID_EMAIL(e.target.value));
       }
 
       const emptyFields: number = Object.values(inputFields[0]).filter(
         (value) => value === "" || !value
       ).length;
 
-      setisEmpty(emptyFields > 0);
+      setIsEmpty(emptyFields > 0);
     } catch (error) {
       console.log(error);
     }

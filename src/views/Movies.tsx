@@ -1,10 +1,8 @@
-import MoviesComponent from '@/components/movies'
-import  { memo } from 'react'
+import { memo } from "react";
+import MoviesComponent from "@/components/movies";
 
 const Movies = memo(() => {
-  return (
-   <MoviesComponent/>
-  )
-})
+  return <MoviesComponent />;
+});
 
-export default Movies
+export default Movies;

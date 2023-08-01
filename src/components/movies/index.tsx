@@ -9,7 +9,7 @@ import Pages from "./pages";
 
 const MoviesComponent = memo(() => {
   const { searchMovies } = useSelector(moviesSelector);
-  const { movies,loading } = useMovies();
+  const { movies, loading } = useMovies();
   return (
     <div className={styles.container}>
       <Buttons />
