@@ -1,2 +1,2 @@
 export const isAuthenticated = () =>
-  sessionStorage.getItem("token") ?? undefined;
+  sessionStorage.getItem("guest_session_id") ?? undefined;

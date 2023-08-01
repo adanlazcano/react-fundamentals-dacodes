@@ -2,11 +2,12 @@
 import { IS_VALID_EMAIL } from "@/assets/constants/regexExp";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as services from "@/services/auth";
 
 type LoginFunctions = {
   inputFields: Array<IInputFields>;
   isEmpty: boolean;
-  isError: boolean;
+  isError: IInputFields;
   onHandleChange: (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -14,9 +15,9 @@ type LoginFunctions = {
   onHandleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 export interface IInputFields {
-  mail: string;
-  pass: string;
-  terms: boolean;
+  mail: string | null;
+  pass: string | null;
+  terms?: boolean;
 }
 
 export const useLogin = (): LoginFunctions => {
@@ -28,7 +29,10 @@ export const useLogin = (): LoginFunctions => {
     },
   ]);
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(true);
+  const [isError, setIsError] = useState<IInputFields>({
+    mail: "",
+    pass: "",
+  });
 
   const navigate = useNavigate();
 
@@ -42,9 +46,22 @@ export const useLogin = (): LoginFunctions => {
         e.target.name === "terms" ? e.target.checked : e.target.value;
       setInputFields(data);
 
-      if (e.target.name === "mail") {
-        setIsError(!IS_VALID_EMAIL(e.target.value));
-      }
+      e.target.name === "mail" &&
+        setIsError({
+          ...isError,
+          [e.target.name]: !IS_VALID_EMAIL(e.target.value)
+            ? "Escribe un email valido."
+            : null,
+        });
+
+      e.target.name === "pass" &&
+        setIsError({
+          ...isError,
+          [e.target.name]:
+            e.target.value.length < 7
+              ? "La contraseña debe tener al menos 7 caracteres."
+              : null,
+        });
 
       const emptyFields: number = Object.values(inputFields[0]).filter(
         (value) => value === "" || !value
@@ -60,11 +77,11 @@ export const useLogin = (): LoginFunctions => {
     try {
       e.preventDefault();
 
-      const token: string = import.meta.env.VITE_APP_API_TOKEN ?? "";
+      const { data }: any = await services.getToken();
 
-      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("guest_session_id", data?.guest_session_id ?? "");
 
-      navigate("/movies");
+      data?.guest_session_id && navigate("/movies");
     } catch (error) {
       console.log(error);
     }

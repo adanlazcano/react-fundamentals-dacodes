@@ -8,6 +8,10 @@
   small {
     margin-left: 0.8rem;
   }
+  .error {
+    margin-top: -10px;
+    color:$clr-error;
+  }
 
   input[type="text"],
   input[type="password"] {
@@ -39,7 +43,7 @@
     margin-top: 1.5rem;
   }
 
-  .disabled{
+  .disabled {
     @include customButton();
     margin-top: 1.5rem;
     background: gray;
