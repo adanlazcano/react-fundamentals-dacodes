@@ -6,9 +6,6 @@ const Form = memo(() => {
   const { inputFields, isEmpty, isError, onHandleChange, onHandleSubmit } =
     useLogin();
 
-    console.log(isError)
-    console.log(Object.values(isError).filter(Boolean))
-
   return (
     <form onSubmit={onHandleSubmit} className={styles.login}>
       {inputFields?.map(({ mail, pass }: IInputFields, index: number) => (
@@ -20,14 +17,14 @@ const Form = memo(() => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onHandleChange(index, e)
             }
-            value={mail ?? ''}
+            value={mail ?? ""}
           />
           <small className={styles.error}>{isError?.mail}</small>
           <small>Contraseña</small>
           <input
             name="pass"
             type="password"
-            value={pass ?? ''}
+            value={pass ?? ""}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               onHandleChange(index, e)
             }
@@ -47,7 +44,11 @@ const Form = memo(() => {
       ))}
 
       <button
-        className={isEmpty || Object.values(isError).filter(Boolean).length > 0 ? styles.disabled : styles.btn}
+        className={
+          isEmpty || Object.values(isError).filter(Boolean).length > 0
+            ? styles.disabled
+            : styles.btn
+        }
         disabled={isEmpty || Object.values(isError).filter(Boolean).length > 0}
       >
         Crear cuenta
